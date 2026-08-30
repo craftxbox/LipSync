@@ -14,7 +14,7 @@ namespace LipSync.Configuration
 
         public static event OnChangedHandler OnChanged = null;
 
-        public virtual bool AutoSetup { get; set; } = false;
+        public virtual bool AutoSetup { get; set; } = true;
         public virtual string MicInput { get; set; } = string.Empty; // Must be 'virtual' if you want BSIPA to detect a value change and save the config automatically.
 
         public virtual bool EnableMicSelectionGUI { get; set; } = false;

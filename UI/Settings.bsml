@@ -1,4 +1,4 @@
 <settings-container>
-  <checkbox-setting text='(EXPERIMENTAL) Auto-Setup' value='autosetup' hover-hint='Give a best-effort attempt to setup an otherwise incompatible avatar.' />
+  <checkbox-setting text='Auto-Setup' value='autosetup' hover-hint='Attempt to find visemes on a model not built specifically for lipsyncing. Not foolproof.' />
   <dropdown-list-setting text='Mic Input' value='micinput' choices='micoptions' hover-hint='Select the mic to use for lipsync.' />
 </settings-container>
