@@ -1,17 +1,11 @@
 ﻿using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using OVRLipSync_Avatar_Extension.Configuration;
-using BeatSaberMarkupLanguage.Settings;
+using LipSync.Configuration;
 using IPALogger = IPA.Logging.Logger;
 
-namespace OVRLipSync_Avatar_Extension
+namespace LipSync
 {
     [Plugin(RuntimeOptions.SingleStartInit)]
     public class Plugin
@@ -32,10 +26,9 @@ namespace OVRLipSync_Avatar_Extension
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
-            new GameObject("OVRLipSync_Avatar_ExtensionController").AddComponent<OVRLipSync_Avatar_ExtensionController>();
-            BSMLSettings.instance.AddSettingsMenu("OVRLipSync", "OVRLipSync_Avatar_Extension.UI.Settings.bsml", UI.Settings.instance);
+            new GameObject("LipSyncExtensionController").AddComponent<LipSyncExtensionController>();
         }
-        
+
         [OnExit]
         public void OnApplicationQuit()
         {

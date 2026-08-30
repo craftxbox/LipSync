@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using System;
 
-namespace OVRLipSync_Avatar_Extension
+namespace LipSync
 {
     /// <summary>
     /// This component is used to setup and manage lipsync for an avatar automatically.
@@ -11,32 +11,30 @@ namespace OVRLipSync_Avatar_Extension
     public class LipSyncController : MonoBehaviour
     {
         [SerializeField]
-        public string VisemeSIL = null,
-                    VisemePP = null,
-                    VisemeFF = null,
-                    VisemeTH = null,
-                    VisemeDD = null,
-                    VisemeKK = null,
-                    VisemeCH = null,
-                    VisemeSS = null,
-                    VisemeNN = null,
-                    VisemeRR = null,
-                    VisemeAA = null,
-                    VisemeEE = null,
-                    VisemeIH = null,
-                    VisemeOH = null,
-                    VisemeOU = null;
+        public string VisemeSIL = string.Empty,
+                    VisemePP = string.Empty,
+                    VisemeFF = string.Empty,
+                    VisemeTH = string.Empty,
+                    VisemeDD = string.Empty,
+                    VisemeKK = string.Empty,
+                    VisemeCH = string.Empty,
+                    VisemeSS = string.Empty,
+                    VisemeNN = string.Empty,
+                    VisemeRR = string.Empty,
+                    VisemeAA = string.Empty,
+                    VisemeEE = string.Empty,
+                    VisemeIH = string.Empty,
+                    VisemeOH = string.Empty,
+                    VisemeOU = string.Empty;
 
         [SerializeField]
         public SkinnedMeshRenderer TargetSMR = null;
 
         private void Awake()
         {
-            OVRLipSyncContext OLSContext = GetComponent<OVRLipSyncContext>();
+            var OLSContext = GetComponent<OVRLipSyncContext>();
             if (OLSContext == null)
             {
-                OLSContext = gameObject.AddComponent<OVRLipSyncContext>();
-                
                 if (!TargetSMR)
                 {
                     if (Configuration.PluginConfig.Instance.AutoSetup)
@@ -61,20 +59,20 @@ namespace OVRLipSync_Avatar_Extension
                 return false;
             }
 
-            if (string.IsNullOrEmpty(VisemeSIL) 
-                || string.IsNullOrEmpty(VisemePP) 
-                || string.IsNullOrEmpty(VisemeFF) 
-                || string.IsNullOrEmpty(VisemeTH) 
-                || string.IsNullOrEmpty(VisemeDD) 
-                || string.IsNullOrEmpty(VisemeKK) 
-                || string.IsNullOrEmpty(VisemeCH) 
-                || string.IsNullOrEmpty(VisemeSS) 
-                || string.IsNullOrEmpty(VisemeNN) 
-                || string.IsNullOrEmpty(VisemeRR) 
-                || string.IsNullOrEmpty(VisemeAA) 
-                || string.IsNullOrEmpty(VisemeEE) 
-                || string.IsNullOrEmpty(VisemeIH) 
-                || string.IsNullOrEmpty(VisemeOH) 
+            if (string.IsNullOrEmpty(VisemeSIL)
+                || string.IsNullOrEmpty(VisemePP)
+                || string.IsNullOrEmpty(VisemeFF)
+                || string.IsNullOrEmpty(VisemeTH)
+                || string.IsNullOrEmpty(VisemeDD)
+                || string.IsNullOrEmpty(VisemeKK)
+                || string.IsNullOrEmpty(VisemeCH)
+                || string.IsNullOrEmpty(VisemeSS)
+                || string.IsNullOrEmpty(VisemeNN)
+                || string.IsNullOrEmpty(VisemeRR)
+                || string.IsNullOrEmpty(VisemeAA)
+                || string.IsNullOrEmpty(VisemeEE)
+                || string.IsNullOrEmpty(VisemeIH)
+                || string.IsNullOrEmpty(VisemeOH)
                 || string.IsNullOrEmpty(VisemeOU))
             {
                 Plugin.Log?.Error("LipSyncController: Not all visemes are configured! Please configure all visemes in the inspector and Re-build your avatar.");
@@ -113,6 +111,13 @@ namespace OVRLipSync_Avatar_Extension
             {
                 Plugin.Log?.Debug("LipSyncController: One SkinnedMeshRenderer found, checking for viseme presence.");
                 SkinnedMeshRenderer SMR = SMRs[0];
+
+                if (SMR.sharedMesh == null)
+                {
+                    Plugin.Log?.Error("LipSyncController: WTF: SkinnedMeshRenderer has no mesh ?");
+                    return;
+                }
+
                 // check if it contains any blendshapes named as a viseme
                 if (SMR.sharedMesh.blendShapeCount > 0)
                 {
@@ -121,6 +126,10 @@ namespace OVRLipSync_Avatar_Extension
                     {
                         Plugin.Log?.Debug("LipSyncController: Visemes found, proceeding with automatic setup.");
                         PerformFinalSetup(SMR, visemes);
+                    }
+                    else
+                    {
+                        Plugin.Log?.Error("LipSyncController: No matching viseme blendshapes found, unable to setup lipsync.");
                     }
                 }
                 else
@@ -131,28 +140,38 @@ namespace OVRLipSync_Avatar_Extension
             }
             else if (SMRs.Length > 1)
             {
-                string SMRWithVisemes;
-                string[] VisemeShapes;
+                var foundVisemes = false;
+
                 Plugin.Log?.Debug("LipSyncController: Multiple SkinnedMeshRenderers found on avatar. Trying to find if any have Visemes.");
                 foreach (SkinnedMeshRenderer SMR in SMRs)
                 {
+                    if (SMR.sharedMesh == null)
+                    {
+                        Plugin.Log?.Error("LipSyncController: WTF: SkinnedMeshRenderer '" + SMR.name + "' has no mesh ?");
+                        return;
+                    }
+
                     if (SMR.sharedMesh.blendShapeCount > 0)
                     {
                         string[] visemes = FindVisemeShapes(SMR);
                         if (visemes.Length > 0)
                         {
-                            SMRWithVisemes = SMR.name;
-                            VisemeShapes = visemes;
-                            Plugin.Log?.Debug("LipSyncController: Visemes found on " + SMRWithVisemes + ", proceeding with automatic setup.");
+                            Plugin.Log?.Debug("LipSyncController: Visemes found on " + SMR.name + ", proceeding with automatic setup.");
                             PerformFinalSetup(SMR, visemes);
+                            foundVisemes = true;
                             break;
                         }
                     }
                     else
                     {
-                        Plugin.Log?.Debug("LipSyncController: SMR has no blendshapes, moving on.");
+                        Plugin.Log?.Debug("LipSyncController: SMR " + SMR.name + " has no blendshapes, moving on.");
                     }
 
+                }
+
+                if (!foundVisemes)
+                {
+                    Plugin.Log?.Error("LipSyncController: No matching viseme blendshapes found on any SkinnedMeshRenderer, unable to setup lipsync.");
                 }
             }
             else
@@ -163,6 +182,7 @@ namespace OVRLipSync_Avatar_Extension
 
         private void PerformFinalSetup(SkinnedMeshRenderer SMR, string[] visemes)
         {
+            SMR.gameObject.AddComponent<OVRLipSyncContext>();
             OVRLipSyncContextMorphTarget OVRMorphTarget = SMR.gameObject.AddComponent<OVRLipSyncContextMorphTarget>();
             OVRLipSyncMicInput OVRMicInput = SMR.gameObject.AddComponent<OVRLipSyncMicInput>();
             OVRMorphTarget.skinnedMeshRenderer = SMR;
@@ -174,7 +194,7 @@ namespace OVRLipSync_Avatar_Extension
         private int[] VisemeIndexes(SkinnedMeshRenderer SMR, string[] visemes)
         {
             int[] output = new int[15];
-            for(int i = 0; i < 14; i++)
+            for (int i = 0; i <= 14; i++)
             {
                 output[i] = SMR.sharedMesh.GetBlendShapeIndex(visemes[i]);
             }
@@ -325,12 +345,12 @@ namespace OVRLipSync_Avatar_Extension
     {
         SIL,
         PP,
-        FF, 
-        TH, 
-        DD, 
-        KK, 
-        CH, 
-        SS, 
+        FF,
+        TH,
+        DD,
+        KK,
+        CH,
+        SS,
         NN,
         RR,
         AA,

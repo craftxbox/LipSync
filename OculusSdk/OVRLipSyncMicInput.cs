@@ -42,7 +42,7 @@ public class OVRLipSyncMicInput : MonoBehaviour
     [Tooltip("Enable a keypress to toggle the microphone device selection GUI.")]
     public bool enableMicSelectionGUI = false;
     [Tooltip("Key to toggle the microphone selection GUI if enabled.")]
-    public KeyCode micSelectionGUIKey = KeyCode.M;
+    public KeyCode micSelectionGUIKey = PluginConfig.Instance.MicSelectionGUIKey;
 
     [SerializeField]
     [Range(0.0f, 100.0f)]
@@ -88,7 +88,7 @@ public class OVRLipSyncMicInput : MonoBehaviour
         if(initialized){
             StopMicrophone();
             selectedDevice = PluginConfig.Instance.MicInput;
-            OVRLipSync_Avatar_Extension.Plugin.Log?.Debug("Selected new device: " + selectedDevice);
+            LipSync.Plugin.Log?.Debug("Selected new device: " + selectedDevice);
             micSelected = true;
             GetMicCaps();
             StartMicrophone();
@@ -127,7 +127,7 @@ public class OVRLipSyncMicInput : MonoBehaviour
         {
             selectedDevice = Microphone.devices[0].ToString();
         }
-        OVRLipSync_Avatar_Extension.Plugin.Log?.Debug("Selected device: " + selectedDevice);
+        LipSync.Plugin.Log?.Debug("Selected device: " + selectedDevice);
         micSelected = true;
         GetMicCaps();
         initialized = true;

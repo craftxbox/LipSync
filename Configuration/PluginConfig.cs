@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using IPA.Config.Stores;
+using UnityEngine;
 
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
-namespace OVRLipSync_Avatar_Extension.Configuration
+namespace LipSync.Configuration
 {
     public delegate void OnChangedHandler();
     internal class PluginConfig
     {
-        public static PluginConfig Instance { get; set; }
+        public static PluginConfig Instance { get; set; } = null;
 
-        public static event OnChangedHandler OnChanged;
+        public static event OnChangedHandler OnChanged = null;
 
         public virtual bool AutoSetup { get; set; } = false;
         public virtual string MicInput { get; set; } = string.Empty; // Must be 'virtual' if you want BSIPA to detect a value change and save the config automatically.
+
+        public virtual bool EnableMicSelectionGUI { get; set; } = false;
+
+        public virtual KeyCode MicSelectionGUIKey { get; set; } = KeyCode.M;
 
         /// <summary>
         /// This is called whenever BSIPA reads the config from disk (including when file changes are detected).
@@ -29,7 +34,7 @@ namespace OVRLipSync_Avatar_Extension.Configuration
         /// </summary>
         public virtual void Changed()
         {
-            OnChanged();
+            OnChanged?.Invoke();
         }
 
         /// <summary>

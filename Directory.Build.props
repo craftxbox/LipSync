@@ -1,8 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- This file contains project properties used by the build. -->
 <Project>
-	<PropertyGroup>
-		<ImportBSMTTargets>True</ImportBSMTTargets>
-		<BSMTProjectType>BSIPA</BSMTProjectType>
-	</PropertyGroup>
+
+  <!-- Plugin Metadata -->
+  <PropertyGroup>
+    <PluginId>LipSync</PluginId>
+    <PluginName>LipSync</PluginName>
+    <Authors>craftxbox</Authors>
+    <Version>1.1.0</Version>
+    <GameVersion>1.40.8</GameVersion>
+    <Description>Lipsyncing for custom avatars.</Description>
+    <ProjectSource>https://github.com/craftxbox/OVRLipSync-Avatar-Extension</ProjectSource>
+    <DonateUrl>https://ko-fi.com/craftxbox</DonateUrl>
+  </PropertyGroup>
+
+  <!-- Plugin Dependencies -->
+  <ItemGroup>
+    <DependsOn Include="BSIPA" Version="^4.3.0"/>
+	<DependsOn Include="CustomAvatar" Version="^5.2.11"/>
+	<DependsOn Include="BeatSaberMarkupLanguage" Version="^1.6.0"/>
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <BSMTProjectType>BSIPA</BSMTProjectType>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' != 'Release'">
+    <DisableZipRelease>true</DisableZipRelease>
+  </PropertyGroup>
+  
 </Project>

@@ -1,12 +1,14 @@
 ﻿using BeatSaberMarkupLanguage.Attributes;
-using OVRLipSync_Avatar_Extension.Configuration;
+using LipSync.Configuration;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace OVRLipSync_Avatar_Extension.UI
+namespace LipSync.UI
 {
-    internal class Settings : PersistentSingleton<Settings>
+    internal class Settings : MonoBehaviour
     {
+
+        public static Settings Instance { get; } = new Settings();
 
         [UIValue("autosetup")]
         public bool AutoSetup
