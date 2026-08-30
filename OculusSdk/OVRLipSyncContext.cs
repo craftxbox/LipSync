@@ -77,7 +77,7 @@ public class OVRLipSyncContext : OVRLipSyncContextBase
         }
 
         // Find console
-        OVRLipSyncDebugConsole[] consoles = FindObjectsOfType<OVRLipSyncDebugConsole>();
+        OVRLipSyncDebugConsole[] consoles = FindObjectsByType<OVRLipSyncDebugConsole>(FindObjectsSortMode.None);
         if (consoles.Length > 0)
         {
             hasDebugConsole = consoles[0];

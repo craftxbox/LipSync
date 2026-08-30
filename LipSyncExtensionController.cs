@@ -35,7 +35,7 @@ namespace LipSync
             if (_playerAvatarManager == null)
             {
                 var sceneContext = SceneManager.GetActiveScene().name;
-                _playerAvatarManager = FindObjectOfType<PlayerAvatarManager>();
+                _playerAvatarManager = FindFirstObjectByType<PlayerAvatarManager>();
                 if (_playerAvatarManager == null)
                 {
                     Plugin.Log?.Debug("PlayerAvatarManager not found, waiting for it to be created...");

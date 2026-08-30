@@ -47,14 +47,14 @@ public class OVRLipSyncDebugConsole : MonoBehaviour
         {
             if (s_Instance == null)
             {
-                s_Instance = FindObjectOfType(typeof(OVRLipSyncDebugConsole)) as OVRLipSyncDebugConsole;
+                s_Instance = FindFirstObjectByType(typeof(OVRLipSyncDebugConsole)) as OVRLipSyncDebugConsole;
 
                 if (s_Instance == null)
                 {
                     GameObject console = new GameObject();
                     console.AddComponent<OVRLipSyncDebugConsole>();
                     console.name = "OVRLipSyncDebugConsole";
-                    s_Instance = FindObjectOfType(typeof(OVRLipSyncDebugConsole)) as OVRLipSyncDebugConsole;
+                    s_Instance = FindFirstObjectByType(typeof(OVRLipSyncDebugConsole)) as OVRLipSyncDebugConsole;
                 }
             }
 
