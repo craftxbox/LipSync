@@ -8,9 +8,9 @@
     <PluginName>LipSync</PluginName>
     <Authors>craftxbox</Authors>
     <Version>1.1.0</Version>
-    <GameVersion>1.40.8</GameVersion>
+    <GameVersion>1.44.1</GameVersion>
     <Description>Lipsyncing for custom avatars.</Description>
-    <ProjectSource>https://github.com/craftxbox/OVRLipSync-Avatar-Extension</ProjectSource>
+    <ProjectSource>https://github.com/craftxbox/LipSync</ProjectSource>
     <DonateUrl>https://ko-fi.com/craftxbox</DonateUrl>
   </PropertyGroup>
 

@@ -25,7 +25,7 @@ using System;
 using UnityEngine;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
-using OVRLipSync_Avatar_Extension.Configuration;
+using LipSync.Configuration;
 using System.Threading;
 
 [RequireComponent(typeof(AudioSource))]
@@ -40,7 +40,7 @@ public class OVRLipSyncMicInput : MonoBehaviour
 
 
     [Tooltip("Enable a keypress to toggle the microphone device selection GUI.")]
-    public bool enableMicSelectionGUI = false;
+    public bool enableMicSelectionGUI = PluginConfig.Instance.EnableMicSelectionGUI;
     [Tooltip("Key to toggle the microphone selection GUI if enabled.")]
     public KeyCode micSelectionGUIKey = PluginConfig.Instance.MicSelectionGUIKey;
 
@@ -85,7 +85,8 @@ public class OVRLipSyncMicInput : MonoBehaviour
 
     private void OnPluginConfigChanged()
     {
-        if(initialized){
+        if (initialized)
+        {
             StopMicrophone();
             selectedDevice = PluginConfig.Instance.MicInput;
             LipSync.Plugin.Log?.Debug("Selected new device: " + selectedDevice);
