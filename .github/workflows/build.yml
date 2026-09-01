@@ -34,6 +34,7 @@ jobs:
       with:
         manifest: ${{github.workspace}}/src/bin/Release/net472/LipSync.manifest
         path: ${{github.workspace}}/Refs
+        aliases: '{"CustomAvatar": "Custom Avatars"}'
 
     - name: Build mod package
       run: dotnet build -c Release

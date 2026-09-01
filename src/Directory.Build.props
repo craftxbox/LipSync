@@ -25,7 +25,7 @@
   <!-- Plugin Dependencies -->
   <ItemGroup>
     <DependsOn Include="BSIPA" Version="^4.3.0" />
-    <DependsOn Include="Custom Avatars" Version="^5.4.10" />
+    <DependsOn Include="CustomAvatar" Version="^5.4.10" />
     <DependsOn Include="BeatSaberMarkupLanguage" Version="^1.6.0" />
   </ItemGroup>
 
