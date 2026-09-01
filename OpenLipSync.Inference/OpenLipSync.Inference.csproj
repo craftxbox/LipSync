@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyVersion>0.2.0</AssemblyVersion>
+        <FileVersion>0.2.0</FileVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.23.2" />
+    </ItemGroup>
+
+    <PropertyGroup Label="NuGet">
+        <Version>1.0.0</Version>
+        <PackageId>YellowDogMan.OpenLipSync</PackageId>
+        <Title>OpenLipSync</Title>
+        <Authors>Yellow Dog Man S.R.O, KyuubiYoru and Contributors</Authors>
+        <Company>Yellow Dog Man S.R.O</Company>
+        <Description>Linux visme analyser</Description>
+        <Copyright>Yellow Dog Man S.R.O 2025</Copyright>
+        <PackageProjectUrl>https://github.com/Yellow-Dog-Man/OpenLipSync</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Yellow-Dog-Man/OpenLipSync</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../../README.md" Pack="true" PackagePath="/" />
+        <None Include="../../../LICENSE" Pack="true" PackagePath="/" />
+    </ItemGroup>
+
+</Project>

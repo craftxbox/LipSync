@@ -1,0 +1,46 @@
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    permissions:
+      contents: read
+    name: build mod package
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7.0.1
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Initialize modding environment
+      uses: beat-forge/init-beatsaber@v1
+      with:
+        version: 1.40.8
+
+    - name: Generate Manifest
+      run: dotnet build -t:BSMT_GenerateManifest -c Release
+
+    - name: Download Dependencies
+      uses: Goobwabber/download-beatmods-deps@1.3
+      with:
+        manifest: ${{github.workspace}}/src/bin/Release/net472/LipSync.manifest
+        path: ${{github.workspace}}/Refs
+
+    - name: Build mod package
+      run: dotnet build -c Release
+
+    - name: Upload mod package
+      uses: actions/upload-artifact@v7
+      with:
+        name: LipSync
+        path: src/bin/Release/net472/zip
+        compression-level: 0

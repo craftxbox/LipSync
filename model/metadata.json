@@ -1,0 +1,22 @@
+{
+  "model_format": "onnx",
+  "opset_version": 11,
+  "input_shape": [
+    1,
+    "variable",
+    80
+  ],
+  "output_shape": [
+    1,
+    "variable",
+    15
+  ],
+  "input_names": [
+    "audio_features"
+  ],
+  "output_names": [
+    "viseme_logits"
+  ],
+  "description": "OpenLipSync TCN model for viseme prediction from mel-spectrogram features",
+  "exporter": "torchscript"
+}

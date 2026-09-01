@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This file contains project properties used by the build. -->
+<Project>
+
+  <!-- Plugin Metadata -->
+  <PropertyGroup>
+    <PluginId>LipSync</PluginId>
+    <PluginName>LipSync</PluginName>
+    <Authors>craftxbox</Authors>
+    <Version>1.1.0</Version>
+    <GameVersion>1.40.8</GameVersion>
+    <Description>Lipsyncing for custom avatars.</Description>
+    <ProjectSource>https://github.com/craftxbox/LipSync</ProjectSource>
+    <DonateUrl>https://ko-fi.com/craftxbox</DonateUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RequiredFile Include="Libs/System.Memory.dll"/>
+    <RequiredFile Include="Libs/Microsoft.ML.OnnxRuntime.dll"/>
+    <RequiredFile Include="Libs/onnxruntime.dll"/>
+    <RequiredFile Include="Libs/onnxruntime_providers_shared.dll"/>
+    <RequiredFile Include="Libs/System.Runtime.CompilerServices.Unsafe.dll"/>
+  </ItemGroup>
+
+  <!-- Plugin Dependencies -->
+  <ItemGroup>
+    <DependsOn Include="BSIPA" Version="^4.3.0" />
+    <DependsOn Include="Custom Avatars" Version="^5.4.11" />
+    <DependsOn Include="BeatSaberMarkupLanguage" Version="^1.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OutputCopy Include="bin\$(Configuration)\net472\System.Memory.dll" OutputPath="Libs\System.Memory.dll" />
+    <OutputCopy Include="bin\$(Configuration)\net472\Microsoft.ML.OnnxRuntime.dll" OutputPath="Libs\Microsoft.ML.OnnxRuntime.dll" />
+    <OutputCopy Include="bin\$(Configuration)\net472\System.Runtime.CompilerServices.Unsafe.dll" OutputPath="Libs\System.Runtime.CompilerServices.Unsafe.dll" />
+    <OutputCopy Include="$(PkgMicrosoft_ML_OnnxRuntime)\runtimes\win-x64\native\onnxruntime.dll" OutputPath="Libs\onnxruntime.dll" />
+    <OutputCopy Include="$(PkgMicrosoft_ML_OnnxRuntime)\runtimes\win-x64\native\onnxruntime_providers_shared.dll" OutputPath="Libs\onnxruntime_providers_shared.dll" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <BSMTProjectType>BSIPA</BSMTProjectType>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' != 'Release'">
+    <DisableZipRelease>true</DisableZipRelease>
+  </PropertyGroup>
+
+</Project>

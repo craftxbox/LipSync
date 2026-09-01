@@ -1,9 +1,8 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LipSync", "LipSync.csproj", "{2537BF50-5B14-4AE0-875C-286DC24B3218}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LipSync", "src/LipSync.csproj", "{2537BF50-5B14-4AE0-875C-286DC24B3218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
