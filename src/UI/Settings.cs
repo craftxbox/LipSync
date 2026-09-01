@@ -38,5 +38,12 @@ namespace LipSync.UI
             }
         }
 
+        [UIValue("visemescale")]
+        public float VisemeScale
+        {
+            get => PluginConfig.Instance.VisemeScale;
+            set => PluginConfig.Instance.VisemeScale = value;
+        }
+
     }
 }

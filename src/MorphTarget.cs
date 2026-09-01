@@ -1,6 +1,7 @@
 using UnityEngine;
 using OpenLipSync.Inference.OVRCompat;
 using OpenLipSync.Inference;
+using LipSync.Configuration;
 
 namespace LipSync;
 
@@ -28,7 +29,7 @@ public class MorphTarget : MonoBehaviour
             int index = SMR.sharedMesh.GetBlendShapeIndex(BlendshapeTargets[i]);
             if (index >= 0)
             {
-                SMR.SetBlendShapeWeight(index, frame.Visemes[i] * 100f);
+                SMR.SetBlendShapeWeight(index, frame.Visemes[i] * 100f * PluginConfig.Instance.VisemeScale);
             }
         }
     }
