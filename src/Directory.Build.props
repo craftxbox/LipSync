@@ -30,6 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <OutputCopy Include="bin\$(Configuration)\net472\LipSync.manifest" OutputPath="manifest.json" />
+    <OutputCopy Include="bin\$(Configuration)\net472\LipSync.dll" OutputPath="Plugins\LipSync.dll" />
     <OutputCopy Include="bin\$(Configuration)\net472\System.Memory.dll" OutputPath="Libs\System.Memory.dll" />
     <OutputCopy Include="bin\$(Configuration)\net472\Microsoft.ML.OnnxRuntime.dll" OutputPath="Libs\Microsoft.ML.OnnxRuntime.dll" />
     <OutputCopy Include="bin\$(Configuration)\net472\System.Runtime.CompilerServices.Unsafe.dll" OutputPath="Libs\System.Runtime.CompilerServices.Unsafe.dll" />
@@ -40,10 +42,6 @@
   <PropertyGroup>
     <BSMTProjectType>BSIPA</BSMTProjectType>
     <GenerateManifest>true</GenerateManifest>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)' != 'Release'">
-    <DisableZipRelease>true</DisableZipRelease>
   </PropertyGroup>
 
 </Project>
