@@ -33,4 +33,4 @@ There is no support for laughter visemes. See #1 for information.
   
 ## Dependencies
 - [CustomAvatars](https://github.com/nicoco007/BeatSaberCustomAvatars)
-- [OVRLipSync](https://developer.oculus.com/downloads/package/oculus-lipsync-unity/)
+- [Microsoft.ML.OnnxRuntime](https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime/)
