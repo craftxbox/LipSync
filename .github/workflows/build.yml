@@ -39,7 +39,9 @@ jobs:
       run: dotnet build -c Release
 
     - name: Zip mod package
-      run: zip -r LipSync.zip src/bin/Release/net472/Artifact/* 
+      run: |
+        cd src/bin/Release/net472/Artifact
+        zip -r "$GITHUB_WORKSPACE/LipSync.zip" .
 
     - name: Upload mod package
       uses: actions/upload-artifact@v7
