@@ -28,7 +28,7 @@ public class MorphTarget : MonoBehaviour
             int index = SMR.sharedMesh.GetBlendShapeIndex(BlendshapeTargets[i]);
             if (index >= 0)
             {
-                SMR.SetBlendShapeWeight(index, frame.Visemes[i] * 1000f);
+                SMR.SetBlendShapeWeight(index, frame.Visemes[i] * 100f);
             }
         }
     }
@@ -41,7 +41,7 @@ public class MorphTarget : MonoBehaviour
 
         for (int i = 0; i < data.Length; i++)
         {
-            //data[i] = 0f; // silence the audio output
+            data[i] = 0f; // silence the audio output
         }
     }
 
